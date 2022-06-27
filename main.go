@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"perpustakaan2/storage/connection"
 	"perpustakaan2/storage/controllers"
 	"perpustakaan2/storage/repositories"
@@ -40,7 +41,7 @@ func main() {
 	r.Delete("/delete-data-rak/{id}", ctrl.DeleteDataRak)
 	r.Put("/update-data-rak/{id}", ctrl.UpdateDataRak)
 
-	if err := http.ListenAndServe(":5000", r); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("HOST")+"", r); err != nil {
 		log.Println("Error Starting Service !")
 	}
 
